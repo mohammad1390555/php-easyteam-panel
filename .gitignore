@@ -1,0 +1,26 @@
+# Configuration
+config.php
+
+# Storage
+storage/database/*.sqlite
+storage/database/*.sqlite-wal
+storage/database/*.sqlite-shm
+storage/logs/*.log
+storage/servers/*
+!storage/servers/.gitkeep
+storage/versions/*
+!storage/versions/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Runtime
+*.pid
+*.log
