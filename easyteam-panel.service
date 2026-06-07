@@ -1,0 +1,60 @@
+[Unit]
+# EasyTeam Panel - Minecraft Server Management
+# ==============================================
+# This service keeps the panel running 24/7 in the background.
+# Even if you close SSH or log out, the panel keeps running.
+# If the panel crashes, it automatically restarts.
+# On system boot, it starts automatically.
+#
+# Official documentation:
+#   https://www.freedesktop.org/software/systemd/man/systemd.service.html
+# ==============================================
+
+Description=EasyTeam Minecraft Panel
+After=network.target
+
+[Service]
+# ---- TYPE ----
+Type=simple
+
+# ---- USER & GROUP ----
+# 🔴 IMPORTANT: Change these to YOUR Linux username!
+#    Run `whoami` in terminal to see your current user.
+#    Examples: ubuntu, root, admin, www-data
+User=www-data
+Group=www-data
+
+# ---- WORKING DIRECTORY ----
+# 🔴 IMPORTANT: Change this to the ACTUAL path where the panel is installed!
+#    Run `pwd` inside the panel folder to find the correct path.
+#    Examples: /home/ubuntu/easyteam-panel, /var/www/html/easyteam-panel
+WorkingDirectory=/var/www/html/easyteam-panel
+
+# ---- START COMMAND ----
+# 🔴 IMPORTANT: Make sure the PHP path is correct!
+#    Run `which php` to find PHP's location on your system.
+#    Examples: /usr/bin/php, /usr/local/bin/php, /usr/bin/php8.1
+#
+# 💡 To change port: Replace "8080" with your desired port number.
+ExecStart=/usr/bin/php -S 0.0.0.0:8080 server.php
+
+# ---- AUTO-RESTART ----
+Restart=always
+RestartSec=5
+
+# ---- ENVIRONMENT (Optional) ----
+# Uncomment if you need to set environment variables:
+# Environment=JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
+# ---- LOG OUTPUT ----
+# View logs: sudo journalctl -u easyteam-panel -f
+# Redirect to file (uncomment):
+# StandardOutput=append:/var/log/easyteam-panel.log
+# StandardError=append:/var/log/easyteam-panel.log
+
+# ---- RESOURCE LIMITS (Optional) ----
+# MemoryMax=512M
+# CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target
