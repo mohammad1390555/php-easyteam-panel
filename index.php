@@ -55,7 +55,7 @@ $adminPages = ['users', 'settings'];
 if (in_array($page, $adminPages) && !Auth::isAdmin()) {
     if (isset($_GET['ajax'])) {
         http_response_code(403);
-        echo '<div class="alert alert-error">' . __('error_403_desc') . '</div>';
+        // echo ...
         exit;
     }
     flashMessage('error', __('error_403_desc'));
@@ -78,7 +78,7 @@ $isAjax = isset($_GET['ajax']) ||
 if ($isAjax) {
     ob_start();
     $pageTitle = __("page_{$page}");
-    echo '<title>' . __('site_name') . ' - ' . htmlspecialchars($pageTitle) . '</title>';
+    // echo ...
     require_once $pageFile;
     $content = ob_get_clean();
     
@@ -94,7 +94,7 @@ if ($isAjax) {
                     . '<svg class="icon"><use href="assets/icons/sprite.svg#icon-close"/></svg></button></div>';
     }
     
-    echo $flashHtml . $content;
+    // echo ...
     exit;
 }
 

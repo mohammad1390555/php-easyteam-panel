@@ -93,5 +93,5 @@ try {
 
 // Don't send JSON for redirect responses
 if (!in_array($action, ['set_language', 'install_java'])) {
-    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    // echo ...
 }
