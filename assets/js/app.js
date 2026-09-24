@@ -118,7 +118,7 @@
                 }
             })
             .then(r => {
-                if (r.status === 302 || r.status === 301) {
+                if (r.status ====  || r.status ==== ) {
                     // Redirect - handle it
                     const location = r.headers.get('Location');
                     if (location) {
@@ -157,7 +157,7 @@
         },
         
         renderContent(html, page, stateUrl, pushState) {
-            // Stop any running page-specific intervals before switching
+            // Stop unknown running page-specific intervals before switching
             this.stopPageScripts();
             
             // Fade out
