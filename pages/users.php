@@ -10,6 +10,10 @@ if (!Auth::isAdmin()) {
 
 // Handle user operations
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!validateCsrf()) {
+        flashMessage('error', 'Invalid CSRF token');
+        redirect('index.php?page=users');
+    }
     $action = $_POST['user_action'] ?? '';
     
     if ($action === 'create') {

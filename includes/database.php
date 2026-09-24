@@ -45,7 +45,17 @@ class Database {
         return self::query($sql, $params)->fetchAll();
     }
 
+    /**
+     * Validate table name against allowlist to prevent SQL injection
+     */
+    private static function isValidTable(string $table): bool {
+        return preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $table) === 1;
+    }
+
     public static function insert(string $table, array $data): int {
+        if (!self::isValidTable($table)) {
+            throw new \InvalidArgumentException("Invalid table name: {$table}");
+        }
         $columns = implode(', ', array_keys($data));
         $placeholders = implode(', ', array_fill(0, count($data), '?'));
         $sql = "INSERT INTO {$table} ({$columns}) VALUES ({$placeholders})";
@@ -54,6 +64,9 @@ class Database {
     }
 
     public static function update(string $table, array $data, string $where, array $whereParams = []): int {
+        if (!self::isValidTable($table)) {
+            throw new \InvalidArgumentException("Invalid table name: {$table}");
+        }
         $sets = implode(' = ?, ', array_keys($data)) . ' = ?';
         $sql = "UPDATE {$table} SET {$sets} WHERE {$where}";
         $stmt = self::query($sql, array_merge(array_values($data), $whereParams));
@@ -61,9 +74,12 @@ class Database {
     }
 
     public static function delete(string $table, string $where, array $params = []): int {
+        if (!self::isValidTable($table)) {
+            throw new \InvalidArgumentException("Invalid table name: {$table}");
+        }
         $sql = "DELETE FROM {$table} WHERE {$where}";
-        self::query($sql, $params);
-        return self::query($sql, $params)->rowCount();
+        $stmt = self::query($sql, $params);
+        return $stmt->rowCount();
     }
 
     public static function createTables(): void {

@@ -31,6 +31,10 @@ $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!validateCsrf()) {
+        flashMessage('error', 'Invalid CSRF token');
+        redirect("index.php?page=files&id=$serverId");
+    }
     $fileAction = $_POST['file_action'] ?? '';
     
     if ($fileAction === 'upload' && isset($_FILES['file'])) {

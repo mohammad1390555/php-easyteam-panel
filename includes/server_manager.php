@@ -62,8 +62,8 @@ class ServerManager {
                 'method' => 'GET',
             ],
             'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
+                'verify_peer' => true,
+                'verify_peer_name' => true,
             ],
         ]);
 
@@ -98,7 +98,7 @@ class ServerManager {
             $url = "https://api.papermc.io/v2/projects/paper/versions/{$version}/builds";
             $context = stream_context_create([
                 'http' => ['timeout' => 5, 'user_agent' => 'EasyTeamPanel/1.0', 'method' => 'GET'],
-                'ssl' => ['verify_peer' => false, 'verify_peer_name' => false],
+                'ssl' => ['verify_peer' => true, 'verify_peer_name' => true],
             ]);
             
             $response = @file_get_contents($url, false, $context);
@@ -236,8 +236,8 @@ class ServerManager {
                 'method' => 'GET',
             ],
             'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
+                'verify_peer' => true,
+                'verify_peer_name' => true,
             ],
         ]);
 

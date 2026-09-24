@@ -8,6 +8,10 @@ $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'install') {
+    if (!validateCsrf()) {
+        flashMessage('error', 'Invalid CSRF token');
+        redirect('index.php?page=versions');
+    }
     $version = $_POST['version'] ?? '';
     $type = $_POST['type'] ?? 'paper';
     

@@ -16,10 +16,13 @@ if (Auth::isLoggedIn()) {
 }
 
 $error = '';
-$recaptchaSiteKey = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; // Google test key
+$recaptchaSiteKey = $_ENV['RECAPTCHA_SITE_KEY'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? '';
+    if (!validateCsrf()) {
+        $error = __('csrf_invalid');
+    } else {
+        $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
 

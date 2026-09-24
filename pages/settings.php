@@ -10,6 +10,10 @@ if (!Auth::isAdmin()) {
 
 // Handle save
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!validateCsrf()) {
+        flashMessage('error', 'Invalid CSRF token');
+        redirect('index.php?page=settings');
+    }
     $settings = [
         'site_name' => $_POST['site_name'] ?? 'EasyTeam Panel',
         'timezone' => $_POST['timezone'] ?? 'Asia/Tehran',
