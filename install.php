@@ -180,7 +180,7 @@ function checkRequirements(): array {
     ];
 
     // Storage Writable
-    $storageWritable = is_writable(__DIR__ . '/storage') || // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionmkdir(__DIR__ . '/storage', 0755, true);
+    $storageWritable = is_writable(__DIR__ . '/storage') || // // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionmkdir(__DIR__ . '/storage', 0755, true);
     $requirements[] = [
         'key' => 'writable',
         'label' => 'Storage Directory Writable',
@@ -213,7 +213,7 @@ function checkRequirements(): array {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نصب پنل ایزی‌تیم</title>
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font// // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionv30.1.0/dist/font-face.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font// // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionv30.1.0/dist/font-face.css" rel="stylesheet" type="text/css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -434,7 +434,7 @@ function checkRequirements(): array {
                     </div>
                     <div class="form-group">
                         <label>ایمیل</label>
-                        <input type="email" name="email" required placeholder="admin// // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionexample.com">
+                        <input type="email" name="email" required placeholder="admin// // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionexample.com">
                     </div>
                     <div class="form-group">
                         <label>رمز عبور</label>
