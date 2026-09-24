@@ -157,7 +157,7 @@
         },
         
         renderContent(html, page, stateUrl, pushState) {
-            // Stop any running page-specific intervals before switching
+            // Stop unknown running page-specific intervals before switching
             this.stopPageScripts();
             
             // Fade out
