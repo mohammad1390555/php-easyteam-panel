@@ -23,46 +23,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = __('csrf_invalid');
     } else {
         $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
 
-    // Verify reCAPTCHA
-    $recaptchaSecret = $_ENV['RECAPTCHA_SECRET_KEY'] ?? '';
-    $verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
-    $verifyData = [
-        'secret' => $recaptchaSecret,
-        'response' => $recaptchaResponse,
-        'remoteip' => $_SERVER['REMOTE_ADDR'],
-    ];
+        // Verify reCAPTCHA
+        $recaptchaSecret = $_ENV['RECAPTCHA_SECRET_KEY'] ?? '';
+        $verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
+        $verifyData = [
+            'secret' => $recaptchaSecret,
+            'response' => $recaptchaResponse,
+            'remoteip' => $_SERVER['REMOTE_ADDR'],
+        ];
 
-    $context = stream_context_create([
-        'http' => [
-            'method' => 'POST',
-            'header' => 'Content-Type: application/x-www-form-urlencoded',
-            'content' => http_build_query($verifyData),
-            'timeout' => 5,
-        ],
-        'ssl' => ['verify_peer' => true, 'verify_peer_name' => true],
-    ]);
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => 'Content-Type: application/x-www-form-urlencoded',
+                'content' => http_build_query($verifyData),
+                'timeout' => 5,
+            ],
+            'ssl' => ['verify_peer' => true, 'verify_peer_name' => true],
+        ]);
 
-    $verifyResult = @file_get_contents($verifyUrl, false, $context);
-    $recaptchaValid = false;
-    
-    if ($verifyResult) {
-        $recaptchaData = json_decode($verifyResult, true);
-        $recaptchaValid = $recaptchaData['success'] ?? false;
-    }
+        $verifyResult = @file_get_contents($verifyUrl, false, $context);
+        $recaptchaValid = false;
 
-    if (!$recaptchaValid) {
-        $error = 'لطفاً تأیید امنیتی را کامل کنید';
-    } elseif (empty($username) || empty($password)) {
-        $error = __('login_error');
-    } elseif (Auth::login($username, $password)) {
-        $redirect = $_SESSION['redirect_after'] ?? 'index.php?page=dashboard';
-        unset($_SESSION['redirect_after']);
-        redirect($redirect);
-    } else {
-        $error = __('login_error');
+        if ($verifyResult) {
+            $recaptchaData = json_decode($verifyResult, true);
+            $recaptchaValid = $recaptchaData['success'] ?? false;
+        }
+
+        if (!$recaptchaValid) {
+            $error = 'لطفاً تأیید امنیتی را کامل کنید';
+        } elseif (empty($username) || empty($password)) {
+            $error = __('login_error');
+        } elseif (Auth::login($username, $password)) {
+            $redirect = $_SESSION['redirect_after'] ?? 'index.php?page=dashboard';
+            unset($_SESSION['redirect_after']);
+            redirect($redirect);
+        } else {
+            $error = __('login_error');
+        }
     }
 }
 
@@ -91,6 +92,7 @@ $flashes = getFlashMessages();
     <?php endforeach; ?>
 
     <form method="post" class="auth-form">
+        <?= csrfField() ?>
         <div class="form-group">
             <label for="username">
                 <svg class="icon icon-16"><use href="assets/icons/sprite.svg#icon-user"/></svg>
@@ -107,12 +109,12 @@ $flashes = getFlashMessages();
             <input type="password" id="password" name="password" required
                    placeholder="<?= __('login_password') ?>">
         </div>
-        
+
         <!-- Google reCAPTCHA -->
         <div class="form-group recaptcha-container" style="display:flex;justify-content:center;margin-bottom:16px;">
             <div class="g-recaptcha" data-sitekey="<?= $recaptchaSiteKey ?>"></div>
         </div>
-        
+
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
             <svg class="icon"><use href="assets/icons/sprite.svg#icon-login"/></svg>
             <?= __('login_btn') ?>

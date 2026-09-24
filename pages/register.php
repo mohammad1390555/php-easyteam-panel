@@ -11,12 +11,9 @@ $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-    $confirmPassword = $_POST['confirm_password'] ?? '';
-
-    if (empty($username) || empty($email) || empty($password)) {
+    if (!validateCsrf()) {
+        $error = __('csrf_invalid');
+    } elseif (empty($username) || empty($email) || empty($password)) {
         $error = __('register_error_empty_fields');
     } elseif ($password !== $confirmPassword) {
         $error = __('register_error_password_match');
@@ -43,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <form method="post" class="auth-form">
+        <?= csrfField() ?>
         <div class="form-group">
             <label for="username"><?= __('register_username') ?></label>
             <input type="text" id="username" name="username" required minlength="3" autofocus
