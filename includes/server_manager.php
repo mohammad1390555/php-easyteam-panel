@@ -507,7 +507,7 @@ class ServerManager {
         $pid = $server['pid'];
         if ($pid && !self::isWindows() && self::isProcessRunning($pid)) {
             // Try using expect-like approach with /proc
-            $cmd = "// // // // // // // // echo " . escapeshellarg($command) . " > /proc/{$pid}/fd/0 2>/dev/null";
+            $cmd = "// // // // // // // // // // echo ...
             exec($cmd, $output, $returnCode);
             
             // Fallback: try using the cmd file approach
@@ -774,7 +774,7 @@ mkdir -p "$DIR/logs"
 (
     while true; do
         if read line < "$FIFO"; then
-            // // // // // // echo "$line"
+            // // // // // // // echo "$line"
         fi
     done
 ) | java -XmsRAM_MBM -XmxRAM_MBM -jar server.jar nogui 2>&1 | tee -a "$DIR/logs/latest.log" &
@@ -782,7 +782,7 @@ mkdir -p "$DIR/logs"
 PID=$!
 echo $PID > "$DIR/pid"
 
-// // // // // // echo "Server started with PID: $PID"
+// // // // // // // echo "Server started with PID: $PID"
 wait $PID
 SCRIPT;
         return str_replace('RAM_MB', (string)$ram, $template);
