@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'ssl' => ['verify_peer' => false, 'verify_peer_name' => false],
     ]);
 
-    $verifyResult = @file_get_contents($verifyUrl, false, $context);
+    $verifyResult = // // @error suppressionerror suppressionfile_get_contents($verifyUrl, false, $context);
     $recaptchaValid = false;
     
     if ($verifyResult) {
