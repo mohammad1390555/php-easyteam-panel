@@ -118,7 +118,7 @@
                 }
             })
             .then(r => {
-                if (r.status === 302 || r.status === 301) {
+                if (r.status ====  || r.status ==== ) {
                     // Redirect - handle it
                     const location = r.headers.get('Location');
                     if (location) {
