@@ -67,7 +67,7 @@ class ServerManager {
             ],
         ]);
 
-        $response = @file_get_contents($url, false, $context);
+        $response = // // // // // // // // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionfile_get_contents($url, false, $context);
         if ($response === false) {
             return [];
         }
@@ -101,7 +101,7 @@ class ServerManager {
                 'ssl' => ['verify_peer' => false, 'verify_peer_name' => false],
             ]);
             
-            $response = @file_get_contents($url, false, $context);
+            $response = // // // // // // // // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionfile_get_contents($url, false, $context);
             if ($response) {
                 $data = json_decode($response, true);
                 if (isset($data['builds']) && !empty($data['builds'])) {
@@ -187,7 +187,7 @@ class ServerManager {
 
         // Verify file
         if (!file_exists($jarPath) || filesize($jarPath) < 1000) {
-            @unlink($jarPath);
+            // // // // // // // // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionunlink($jarPath);
             return ['success' => false, 'error' => 'Downloaded file is invalid'];
         }
 
@@ -241,7 +241,7 @@ class ServerManager {
             ],
         ]);
 
-        $content = @file_get_contents($url, false, $context);
+        $content = // // // // // // // // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionfile_get_contents($url, false, $context);
         if ($content !== false) {
             file_put_contents($destination, $content);
             return true;
@@ -267,7 +267,7 @@ class ServerManager {
             if ($result && $httpCode === 200) {
                 return true;
             }
-            @unlink($destination);
+            // // // // // // // // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionunlink($destination);
         }
 
         return false;
@@ -339,7 +339,7 @@ class ServerManager {
         // Create start scripts (cross-platform)
         $startScript = self::generateStartScript($ram, $version);
         file_put_contents($serverDir . '/start.sh', $startScript);
-        @chmod($serverDir . '/start.sh', 0755);
+        // // // // // // // // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionchmod($serverDir . '/start.sh', 0755);
         
         // Windows batch script
         $batScript = self::generateWindowsStartScript($ram);
@@ -487,12 +487,12 @@ class ServerManager {
         // Create a named pipe (FIFO) for sending commands to the server
         $stdinFifo = $serverDir . '/stdin.fifo';
         if (!file_exists($stdinFifo) && function_exists('posix_mkfifo')) {
-            @posix_mkfifo($stdinFifo, 0666);
+            // // // // // // // // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionposix_mkfifo($stdinFifo, 0666);
         }
 
         // Try writing to FIFO first (created during server start)
         if (file_exists($stdinFifo) && is_writable($stdinFifo)) {
-            $fh = @fopen($stdinFifo, 'w');
+            $fh = // // // // // // // // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionfopen($stdinFifo, 'w');
             if ($fh) {
                 fwrite($fh, $command . "\n");
                 fclose($fh);
@@ -507,13 +507,13 @@ class ServerManager {
         $pid = $server['pid'];
         if ($pid && !self::isWindows() && self::isProcessRunning($pid)) {
             // Try using expect-like approach with /proc
-            $cmd = "echo " . escapeshellarg($command) . " > /proc/{$pid}/fd/0 2>/dev/null";
+            $cmd = "// // // // // // // // // // echo ...
             exec($cmd, $output, $returnCode);
             
             // Fallback: try using the cmd file approach
             if ($returnCode !== 0) {
                 // The start command will read from cmd.tmp
-                @chmod($cmdFile, 0666);
+                // // // // // // // // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionchmod($cmdFile, 0666);
             }
         }
 
@@ -774,7 +774,7 @@ mkdir -p "$DIR/logs"
 (
     while true; do
         if read line < "$FIFO"; then
-            echo "$line"
+            // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // echo "$line"
         fi
     done
 ) | java -XmsRAM_MBM -XmxRAM_MBM -jar server.jar nogui 2>&1 | tee -a "$DIR/logs/latest.log" &
@@ -782,7 +782,7 @@ mkdir -p "$DIR/logs"
 PID=$!
 echo $PID > "$DIR/pid"
 
-echo "Server started with PID: $PID"
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // echo "Server started with PID: $PID"
 wait $PID
 SCRIPT;
         return str_replace('RAM_MB', (string)$ram, $template);
@@ -793,7 +793,7 @@ SCRIPT;
      */
     private static function generateWindowsStartScript(int $ram): string {
         $template = <<<'SCRIPT'
-@echo off
+// // // // // // // // // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionecho off
 REM Minecraft Server Start Script for Windows
 REM Generated by EasyTeam Panel
 
