@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirmPassword = $_POST['confirm_password'] ?? '';
 
     if (empty($username) || empty($email) || empty($password)) {
-        $error = __('register_error_password_match'); // Generic error
+        $error = __('register_error_empty_fields');
     } elseif ($password !== $confirmPassword) {
         $error = __('register_error_password_match');
     } else {

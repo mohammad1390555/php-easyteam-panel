@@ -12,7 +12,7 @@ class Auth {
             session_set_cookie_params([
                 'lifetime' => SESSION_LIFETIME,
                 'path' => '/',
-                'secure' => false,
+                'secure' => filter_var($_ENV['SESSION_SECURE'] ?? '1', FILTER_VALIDATE_BOOLEAN),
                 'httponly' => true,
                 'samesite' => 'Lax',
             ]);

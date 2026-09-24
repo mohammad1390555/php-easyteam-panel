@@ -104,7 +104,12 @@ function getFileType(string $filename): string {
  */
 function generatePassword(int $length = 12): string {
     $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
-    return substr(str_shuffle($chars), 0, $length);
+    $password = '';
+    $len = strlen($chars);
+    for ($i = 0; $i < $length; $i++) {
+        $password .= $chars[random_int(0, $len - 1)];
+    }
+    return $password;
 }
 
 /**

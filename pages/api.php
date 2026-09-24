@@ -20,7 +20,12 @@ try {
         }
         
         if (isset($_GET['redirect'])) {
-            redirect('index.php?page=' . $_GET['redirect']);
+            $redirect = $_GET['redirect'];
+            // Only allow internal page redirects, never external URLs
+            if (preg_match('/^index\.php\?page=[a-zA-Z0-9_]+$/', $redirect)) {
+                redirect($redirect);
+            }
+            redirect('index.php?page=dashboard');
         }
         redirect($_SERVER['HTTP_REFERER'] ?? 'index.php?page=dashboard');
     }

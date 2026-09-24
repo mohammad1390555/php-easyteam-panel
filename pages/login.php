@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
 
     // Verify reCAPTCHA
-    $recaptchaSecret = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'; // Google test key
+    $recaptchaSecret = $_ENV['RECAPTCHA_SECRET_KEY'] ?? '';
     $verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
     $verifyData = [
         'secret' => $recaptchaSecret,
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'content' => http_build_query($verifyData),
             'timeout' => 5,
         ],
-        'ssl' => ['verify_peer' => false, 'verify_peer_name' => false],
+        'ssl' => ['verify_peer' => true, 'verify_peer_name' => true],
     ]);
 
     $verifyResult = @file_get_contents($verifyUrl, false, $context);
