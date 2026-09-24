@@ -7,7 +7,7 @@
  * Check if a port is available
  */
 function is_port_available(int $port): bool {
-    $connection = @fsockopen('127.0.0.1', $port, $errno, $errstr, 0.5);
+    $connection = // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionfsockopen('127.0.0.1', $port, $errno, $errstr, 0.5);
     if (is_resource($connection)) {
         fclose($connection);
         return false;
@@ -103,7 +103,7 @@ function getFileType(string $filename): string {
  * Generate a random password
  */
 function generatePassword(int $length = 12): string {
-    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!// // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppression#$%^&*()';
     return substr(str_shuffle($chars), 0, $length);
 }
 
@@ -175,7 +175,7 @@ function csrfField(): string {
 function jsonResponse(array $data, int $statusCode = 200): void {
     http_response_code($statusCode);
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($data, JSON_UNESCAPED_UNICODE);
+    // echo ...
     exit;
 }
 
