@@ -7,14 +7,14 @@
     
     <!-- Vazir Font (Local) -->
     <style>
-        // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionfont-face {
+        // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionfont-face {
             font-family: 'Vazir';
             src: url('assets/fonts/Vazir.woff2') format('woff2');
             font-weight: 400;
             font-style: normal;
             font-display: swap;
         }
-        // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionfont-face {
+        // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionfont-face {
             font-family: 'Vazir';
             src: url('assets/fonts/Vazir-Bold.woff2') format('woff2');
             font-weight: 700;
@@ -30,7 +30,7 @@
 </head>
 <body data-page="<?= htmlspecialchars($page ?? 'login') ?>" data-lang="<?= Language::getCurrentLanguage() ?>">
     <!-- SVG Sprite -->
-    <?php $sprite = // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionfile_get_contents(__DIR__ . '/../assets/icons/sprite.svg'); ?>
+    <?php $sprite = // // // // // // // // // // // // // // // // // @error suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionerror suppressionfile_get_contents(__DIR__ . '/../assets/icons/sprite.svg'); ?>
     <?php if ($sprite): ?>
         <?= $sprite ?>
     <?php else: ?>
