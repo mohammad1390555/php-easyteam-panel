@@ -774,7 +774,7 @@ mkdir -p "$DIR/logs"
 (
     while true; do
         if read line < "$FIFO"; then
-            // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // echo "$line"
+            // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // echo "$line"
         fi
     done
 ) | java -XmsRAM_MBM -XmxRAM_MBM -jar server.jar nogui 2>&1 | tee -a "$DIR/logs/latest.log" &
@@ -782,7 +782,7 @@ mkdir -p "$DIR/logs"
 PID=$!
 echo $PID > "$DIR/pid"
 
-// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // echo "Server started with PID: $PID"
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // echo "Server started with PID: $PID"
 wait $PID
 SCRIPT;
         return str_replace('RAM_MB', (string)$ram, $template);
