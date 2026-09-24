@@ -187,8 +187,8 @@ if (isset($_GET['edit'])) {
         foreach ($parts as $part) {
             if (empty($part)) continue;
             $cumulative .= '/' . $part;
-            echo '<span class="breadcrumb-sep">/</span>';
-            echo '<a href="index.php?page=files&id=' . $serverId . '&path=' . urlencode(ltrim($cumulative, '/')) . '" class="breadcrumb-item">' . htmlspecialchars($part) . '</a>';
+            // echo ...
+            // echo ...
         }
         ?>
     </div>
